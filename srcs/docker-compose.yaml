@@ -1,0 +1,28 @@
+version: "2.2"
+
+services:
+  nginx:
+    build: requirements/nginx/.
+    image: nginx_image
+    container_name: nginx_container
+    restart: always
+    volumes:
+      - ./html:/var/www/html
+    ports:
+      - "80:80"
+
+  wordpress:
+    build: requirements/wordpress/.
+    image: wp_image
+    container_name: wp_container
+    restart: always
+    volumes:
+      - ./html:/var/www/html
+
+        #  mariadb:
+    #    build: requirements/mariadb/.
+      #    image: mariadb_image
+      #    container_name: mariadb_container
+      #    restart: always
+      #    env_file:
+      #      - ./.env

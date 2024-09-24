@@ -1,0 +1,24 @@
+nginx is a webserver that serve webcontent, such as HTML Pages, images, and scripts, to clients (usually web browesers) over the HTTP/HTTP protocols.
+
+functionality: processes client requests for web pages, executes server-side scripts, and serves static or dynamic content, it can handle user sessions, cookies, and more.
+
+static content: remains the same for all users , regardless of their behavior or real-time events.
+dynamic content: content generated in real-time based on user behaviour or real-time events.
+
+how to setup nginx from apt
+	bashcmd: sudo apt-get update && sudo apt-get install nginx
+
+there is 2 main files, to deal with
+
+	1 - /etc/nginx/nginx.conf : config file for nginx
+	2 - /etc/nginx/availble-sites/default : default config for nginx
+
+root: /var/www/html location where htmpl files located
+
+- check that nginx config wors properly :
+	bashcmd: sudo nginx -t
+
+- reload nginx after making a change in config file:
+	bashcmd: sudo nginx -s reload
+
+as i know that weserve works with CGI or FastCGI to process complicated data or unkown data for server 

@@ -1,0 +1,11 @@
+php-fpm : php FastCGi process manager, is php implementation designed to handle high leads and manage PHP processes more efficiently.
+
+php-fpm works as bridge between nginx webserver (to server php application) and php interpreter,
+
+Routing: the process of redercting the content to CGI is called routing.
+
+if the request is for a PHP file, Nginx routes it to the PHP-FPM service using FastCGI, this is typically defined in the Nginx config file
+
+php-mysqli is a PHP extension that provides a way to interact with MySQL databases using the MySQLi (MySQL Improved) driver
+
+curl: is a command line tool that allows transfer data using various transfer network protocol, It is widely used for making HTTP requests, but it also supports many other protocols like FTP, FTPS, SCP, SFTP, LDAP, and more.

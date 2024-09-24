@@ -1,0 +1,16 @@
+FROM debian:bullseye
+
+RUN  apt-get upgrade -y\
+	&& apt-get update -y\
+	&& apt-get install -y nginx
+
+COPY . .
+
+RUN ln -s /etc/nginx/sites-available/default ~/default; cat config/default > ~/default
+
+# move the nginx config to right path
+# what about the pages ?
+
+EXPOSE 8080
+
+CMD [ "nginx", "-g", "daemon off;" ]
