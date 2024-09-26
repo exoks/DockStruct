@@ -21,7 +21,7 @@ services:
     image: mariadb:image
     container_name: mariadb_container
     volumes:
-      - db:/var/lib/mysql
+      - database:/var/lib/mysql
     env_file:
       - .env
     restart: always
@@ -33,7 +33,7 @@ services:
     image: wordpress:image
     container_name: wp_container
     volumes:
-      - wp:/var/www/html
+      - wordpress:/var/www/html
     env_file:
       - .env
     restart: always
@@ -45,7 +45,7 @@ services:
     image: nginx:image
     container_name: nginx_container
     volumes:
-      - wp:/var/www/html
+      - wordpress:/var/www/html
     ports:
       - "443:443"
     restart: always
@@ -53,16 +53,16 @@ services:
       - inception
 
 volumes:
-  db:
+  database:
     driver_opts:    
       type : local
-      device: /home/osboxes/db
+      device: /home/osboxes/database
       o: bind
 
-  wp:
+  wordpress:
     driver_opts:    
       type : local
-      device: /home/osboxes/wp
+      device: /home/osboxes/wordpress
       o: bind
 
 networks:

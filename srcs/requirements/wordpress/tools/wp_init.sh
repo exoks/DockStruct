@@ -15,8 +15,13 @@ fi
 
 chmod +x ${wpcli}
 
+# downloads the WordPress core files to the current directory.
 ./${wpcli} core download --allow-root
-./${wpcli} config create --dbname=wordpress --dbuser=oezzaou --dbpass=1234 --dbhost=mariadb --allow-root
-./${wpcli} core install --url=localhost --title=inception --admin_user=admin --admin_password=admin --admin_email=admin@admin.com --allow-root
+
+# creates the wp-config.php file with the specified database configuration
+./${wpcli} config create --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASSWORD --dbhost=mariadb --allow-root
+
+# completes the WordPress installation process, setting up the site with the specified parameters
+./${wpcli} core install --url=https://oezzaou.42.fr --title=inception --admin_user=admin --admin_password=admin --admin_email=admin@admin.com --allow-root
 
 exec "$@"

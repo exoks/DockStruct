@@ -35,17 +35,17 @@
 server {
 
 	listen 443 ssl;
+	
+	server_name oezzaou.42.fr;
 
 	root /var/www/html;
 
 	# Add index.php to the list if you are using PHP
 	index index.php index.html index.htm index.nginx-debian.html;
 
-	server_name oezzaou.42.fr;
-
 	ssl_certificate signed.crt;
 	ssl_certificate_key prv.key;
-	ssl_protocols TLSv1.3; 
+	ssl_protocols TLSv1.2; 
 
 	location / {
 		# First attempt to serve request as file, then

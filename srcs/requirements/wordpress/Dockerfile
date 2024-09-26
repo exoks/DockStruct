@@ -16,7 +16,7 @@
 FROM debian:bullseye
 
 RUN apt-get upgrade -y && apt-get update -y\
-	&& apt-get install -y php-fpm php-mysql curl mariadb-client
+	&& apt-get install -y php-fpm php-mysqli curl mariadb-client
 
 COPY . .
 

@@ -15,8 +15,8 @@
 #====[ Makefile : ]=============================================================
 DOCKER_COMPOSE	:= srcs/docker-compose.yml
 VOLUMES_DIR	:= /home/osboxes
-DATABASE_DIR	:= ${VOLUMES_DIR}/db
-WORDPRESS_DIR	:= ${VOLUMES_DIR}/wp
+DATABASE_DIR	:= ${VOLUMES_DIR}/database
+WORDPRESS_DIR	:= ${VOLUMES_DIR}/wordpress
 RM		:= rm -rf
 
 all:

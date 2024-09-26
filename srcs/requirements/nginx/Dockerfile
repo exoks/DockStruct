@@ -24,9 +24,12 @@ RUN openssl genrsa -out prv.key 2048\
 	&& openssl x509 -req -days 200 -in request.csr -signkey prv.key -out signed.crt\
 	&& mv prv.key /etc/nginx/.; mv signed.crt /etc/nginx/.
 
-RUN ln -s /etc/nginx/sites-available/default ~/nginx.conf\
-	&& cat config/default > ~/nginx.conf
+COPY config/default /etc/nginx/sites-available/nginx.conf
+RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/nginx
 
+#RUN ln -s /etc/nginx/sites-available/default ~/nginx.conf\
+#	&& cat config/default > ~/nginx.conf
+ 
 EXPOSE 8080
 
 CMD [ "nginx", "-g", "daemon off;" ]
