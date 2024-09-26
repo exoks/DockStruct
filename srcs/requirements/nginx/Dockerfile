@@ -15,9 +15,14 @@
 #====[ Dockerfile: nginx ]======================================================
 FROM debian:bullseye
 
-RUN  apt-get update -y && apt-get install -y nginx
+RUN  apt-get update -y && apt-get install -y nginx openssl
 
 COPY . .
+
+RUN openssl genrsa -out prv.key 2048\
+	&& openssl req -new -key prv.key -out request.csr -subj "/C=MA/L=Marrakech/CN=oezzaou.42.fr"\
+	&& openssl x509 -req -days 200 -in request.csr -signkey prv.key -out signed.crt\
+	&& mv prv.key /etc/nginx/.; mv signed.crt /etc/nginx/.
 
 RUN ln -s /etc/nginx/sites-available/default ~/nginx.conf\
 	&& cat config/default > ~/nginx.conf
