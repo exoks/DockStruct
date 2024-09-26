@@ -22,8 +22,6 @@ COPY . .
 
 RUN mkdir -p /run/php/ # create php-fpm7.4 sockdir
 
-# create ssl TSLv
-
 RUN ln -s /etc/php/7.4/fpm/pool.d/www.conf ~/php-fpm.conf\
 	&& cat config/www.conf > ~/php-fpm.conf
 

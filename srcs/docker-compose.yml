@@ -16,17 +16,17 @@
 version: "3.3"
 
 services:
-  #  mariadb:
-  #    build: requirements/mariadb/.
-  #    image: mariadb:image
-  #    container_name: mariadb_container
-  #    volumes:
-  #      - db:/var/lib/mysql
-  #    env_file:
-  #      - .env
-  #    restart: always
-  #    networks:
-  #      - inception
+  mariadb:
+    build: requirements/mariadb/.
+    image: mariadb:image
+    container_name: mariadb_container
+    volumes:
+      - db:/var/lib/mysql
+    env_file:
+      - .env
+    restart: always
+    networks:
+      - inception
 
   wordpress:
     build: requirements/wordpress/.
@@ -53,11 +53,11 @@ services:
       - inception
 
 volumes:
-  #  db:
-    #    driver_opts:    
-      #      type : local
-        #      device: /home/osboxes/db
-        #      o: bind
+  db:
+    driver_opts:    
+      type : local
+      device: /home/osboxes/db
+      o: bind
 
   wp:
     driver_opts:    

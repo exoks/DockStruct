@@ -6,7 +6,7 @@ sql_dbs=$(cat config/my.cnf | awk '/^datadir*/{print $3}')
 sql_default=~/my.cnf
 WPDB_NAME=wordpress
 WPDB_USER=oezzaou
-WPDB_PASS=oezzaou1234
+WPDB_PASSWORD=oezzaou1234
 
 service mariadb start
 
@@ -32,7 +32,7 @@ chown -R mysql:mysql ${sql_dbs}
 if [ ! -f ${sql_dbs}/$WPDB_NAME ]; then
 	mariadb <<-EOF
 	CREATE DATABASE $WPDB_NAME;
-	CREATE USER '$WPDB_USER' IDENTIFIED BY '$WPDB_PASS';
+	CREATE USER '$WPDB_USER' IDENTIFIED BY '$WPDB_PASSWORD';
 	GRANT ALL PRIVILEGES ON $WPDB_NAME.* TO '$WPDB_USER'@'%';
 	FLUSH PRIVILEGES;
 	EOF

@@ -20,17 +20,17 @@ WORDPRESS_DIR	:= ${VOLUMES_DIR}/wp
 RM		:= rm -rf
 
 all:
-	mkdir -p ${WORDPRESS_DIR} #${DATABASE_DIR} 
+	mkdir -p ${WORDPRESS_DIR} ${DATABASE_DIR} 
 	sudo docker-compose -f ${DOCKER_COMPOSE} up --build
 
 clean:
 	sudo docker-compose -f ${DOCKER_COMPOSE} down
-#	${RM} ${DATABASE_DIR}/*
+	${RM} ${DATABASE_DIR}/*
 	${RM} ${WORDPRESS_DIR}/*
 
 fclean: clean
 	sudo docker-compose -f ${DOCKER_COMPOSE} down --rmi all
-	${RM} ${WORDPRESS_DIR} #${DATABASE_DIR}
+	${RM} ${WORDPRESS_DIR} ${DATABASE_DIR}
 
 re: fclean all
 
