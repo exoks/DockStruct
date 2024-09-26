@@ -12,31 +12,59 @@
 #  ⠀⠀⠀⠀⠀⡄⠀⠀⠀⠘⢧⡀⠀⠀⠸⣿⣿⣿⠟⠀⠀⠀⠀⠀⠀⠐⠋⠀⠀⠀                     𓄂 oussama ezzaou𓆃  
 #  ⠀⠀⠀⠀⠀⠘⠄⣀⡀⠸⠓⠀⠀⠀⠠⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                              
 
-version: "2.2"
+#====[ docker-compose: mariadb | nginx | php-fpm:wordpress ]====================
+version: "3.3"
 
 services:
-  nginx:
-    build: requirements/nginx/.
-    image: nginx_image
-    container_name: nginx_container
-    restart: always
-    volumes:
-      - ./html:/var/www/html
-    ports:
-      - "80:80"
+  #  mariadb:
+  #    build: requirements/mariadb/.
+  #    image: mariadb:image
+  #    container_name: mariadb_container
+  #    volumes:
+  #      - db:/var/lib/mysql
+  #    env_file:
+  #      - .env
+  #    restart: always
+  #    networks:
+  #      - inception
 
   wordpress:
     build: requirements/wordpress/.
-    image: wp_image
+    image: wordpress:image
     container_name: wp_container
-    restart: always
     volumes:
-      - ./html:/var/www/html
+      - wp:/var/www/html
+    env_file:
+      - .env
+    restart: always
+    networks:
+      - inception
 
-        #  mariadb:
-    #    build: requirements/mariadb/.
-      #    image: mariadb_image
-      #    container_name: mariadb_container
-      #    restart: always
-      #    env_file:
-      #      - ./.env
+  nginx:
+    build: requirements/nginx/.
+    image: nginx:image
+    container_name: nginx_container
+    volumes:
+      - wp:/var/www/html
+    ports:
+      - "80:80"
+    restart: always
+    networks:
+      - inception
+
+volumes:
+  #  db:
+    #    driver_opts:    
+      #      type : local
+        #      device: /home/osboxes/db
+        #      o: bind
+
+  wp:
+    driver_opts:    
+      type : local
+      device: /home/osboxes/wp
+      o: bind
+
+networks:
+  inception: # default bridge connection
+#====[ docker-compose: ]========================================================

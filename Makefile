@@ -11,8 +11,8 @@
 #  ⠀⠀⠀⠀⠀⠱⠤⠊⠀⢀⣿⡿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠘⣿⠏⠀⠀                             𓆩♕𓆪      
 #  ⠀⠀⠀⠀⠀⡄⠀⠀⠀⠘⢧⡀⠀⠀⠸⣿⣿⣿⠟⠀⠀⠀⠀⠀⠀⠐⠋⠀⠀⠀                     𓄂 oussama ezzaou𓆃  
 #  ⠀⠀⠀⠀⠀⠘⠄⣀⡀⠸⠓⠀⠀⠀⠠⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                              
-#====[ Makefile : ]=============================================================
 
+#====[ Makefile : ]=============================================================
 DOCKER_COMPOSE	:= srcs/docker-compose.yml
 VOLUMES_DIR	:= /home/osboxes
 DATABASE_DIR	:= ${VOLUMES_DIR}/db
@@ -20,19 +20,19 @@ WORDPRESS_DIR	:= ${VOLUMES_DIR}/wp
 RM		:= rm -rf
 
 all:
-	mkdir -p ${DATABASE_DIR} ${WORDPRESS_DIR}
-	sudo docker-compose -f ${DOCKER_COMPOSE} up --build -d
+	mkdir -p ${WORDPRESS_DIR} #${DATABASE_DIR} 
+	sudo docker-compose -f ${DOCKER_COMPOSE} up --build
 
 clean:
 	sudo docker-compose -f ${DOCKER_COMPOSE} down
-	${RM} ${DATABASE_DIR}/*
+#	${RM} ${DATABASE_DIR}/*
 	${RM} ${WORDPRESS_DIR}/*
 
 fclean: clean
-	sudo docker-compose down -f ${DOCKER_COMPOSE} --rmi all
-	${RM} ${DATABASE_DIR} ${WORDPRESS_DIR}
+	sudo docker-compose -f ${DOCKER_COMPOSE} down --rmi all
+	${RM} ${WORDPRESS_DIR} #${DATABASE_DIR}
 
 re: fclean all
 
 .PHONY: all clean fclean re
-//====[ Makefile: ]=============================================================
+#=====[ Makefile: ]=============================================================

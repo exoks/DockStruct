@@ -41,7 +41,7 @@ server {
 	# Add index.php to the list if you are using PHP
 	index index.php index.html index.htm index.nginx-debian.html;
 
-	server_name _;
+	server_name oezzaou.42.fr;
 
 	location / {
 		# First attempt to serve request as file, then
@@ -58,5 +58,4 @@ server {
 	#	# With php-cgi (or other tcp sockets):
 		fastcgi_pass wp_container:9000;
 	}
-
 }
