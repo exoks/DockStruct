@@ -4,9 +4,9 @@ sql_conf=$(cat config/my.cnf | awk '/^socket*/{print $3}')
 sql_confs=$(mysqld -v --help | awk '/my.cnf /')
 sql_dbs=$(cat config/my.cnf | awk '/^datadir*/{print $3}')
 sql_default=~/my.cnf
-WPDB_NAME=wordpress
-WPDB_USER=oezzaou
-WPDB_PASSWORD=oezzaou1234
+DB_NAME=wordpress
+DB_USER=oezzaou
+DB_PASSWORD=1234
 
 service mariadb start
 
@@ -29,12 +29,13 @@ fi
 
 chown -R mysql:mysql ${sql_dbs}
 
-if [ ! -f ${sql_dbs}/$WPDB_NAME ]; then
+if [ ! -d ${sql_dbs}/$DB_NAME ]; then
 	mariadb <<-EOF
-	CREATE DATABASE $WPDB_NAME;
-	CREATE USER '$WPDB_USER' IDENTIFIED BY '$WPDB_PASSWORD';
-	GRANT ALL PRIVILEGES ON $WPDB_NAME.* TO '$WPDB_USER'@'%';
+	CREATE DATABASE $DB_NAME;
+	CREATE USER '$DB_USER' IDENTIFIED BY '$DB_PASSWORD';
+	GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%';
 	FLUSH PRIVILEGES;
 	EOF
 fi
-#====[ init.sh: ]===============================================================
+
+#====[ init.sh: ]==============================================================
