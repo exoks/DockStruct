@@ -56,13 +56,13 @@ volumes:
   database:
     driver_opts:    
       type : local
-      device: /home/osboxes/database
+      device: /home/oezzaou/data/database
       o: bind
 
   wordpress:
     driver_opts:    
       type : local
-      device: /home/osboxes/wordpress
+      device: /home/oezzaou/data/wordpress
       o: bind
 
 networks:

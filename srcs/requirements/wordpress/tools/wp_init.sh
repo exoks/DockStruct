@@ -22,6 +22,9 @@ chmod +x ${wpcli}
 ./${wpcli} config create --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASSWORD --dbhost=mariadb --allow-root
 
 # completes the WordPress installation process, setting up the site with the specified parameters
-./${wpcli} core install --url=https://oezzaou.42.fr --title=inception --admin_user=admin --admin_password=admin --admin_email=admin@admin.com --allow-root
+./${wpcli} core install --url=https://oezzaou.42.fr --title=inception --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_EMAIL --allow-root
+
+# create user
+./${wpcli} user create $WP_USER $WP_EMAIL --role=$WP_ROLE --allow-root
 
 exec "$@"

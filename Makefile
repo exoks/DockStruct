@@ -13,24 +13,24 @@
 #  ⠀⠀⠀⠀⠀⠘⠄⣀⡀⠸⠓⠀⠀⠀⠠⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                              
 
 #====[ Makefile : ]=============================================================
-DOCKER_COMPOSE	:= srcs/docker-compose.yml
-VOLUMES_DIR	:= /home/osboxes
-DATABASE_DIR	:= ${VOLUMES_DIR}/database
-WORDPRESS_DIR	:= ${VOLUMES_DIR}/wordpress
-RM		:= rm -rf
+DOCKER_COMPOSE_FILE	:= srcs/docker-compose.yml
+VOLUMES_DIR		:= /home/oezzaou/data
+DATABASE_DIR		:= ${VOLUMES_DIR}/database
+WORDPRESS_DIR		:= ${VOLUMES_DIR}/wordpress
+RM			:= rm -rf
 
-all:
-	mkdir -p ${WORDPRESS_DIR} ${DATABASE_DIR}
-	sudo docker-compose -f ${DOCKER_COMPOSE} up --build
+all: 
+	mkdir -p ${VOLUMES_DIR} ${WORDPRESS_DIR} ${DATABASE_DIR}
+	sudo docker-compose -f ${DOCKER_COMPOSE_FILE} up --build
 
 clean:
-	sudo docker-compose -f ${DOCKER_COMPOSE} down
-	${RM} ${DATABASE_DIR}/*
-	${RM} ${WORDPRESS_DIR}/*
+	sudo docker system prune -f
+	sudo ${RM} ${DATABASE_DIR}/*
+	sudo ${RM} ${WORDPRESS_DIR}/*
 
 fclean: clean
-	sudo docker system prune -f
-	${RM} ${WORDPRESS_DIR} ${DATABASE_DIR}
+	sudo docker-compose -f ${DOCKER_COMPOSE_FILE} down --rmi all
+	sudo ${RM} ${VOLUMES_DIR}
 
 re: fclean all
 
